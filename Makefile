@@ -1,1 +1,2 @@
-run go src/main.go
+run:
+	go build && ./pratt
