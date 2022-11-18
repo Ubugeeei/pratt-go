@@ -3,7 +3,7 @@ package main
 import "testing"
 
 func TestLexer(t *testing.T) {
-	lx := NewLexer("1 + 2")
+	lx := NewLexer("1+2")
 
 	tests := []Token{
 		{
@@ -20,10 +20,10 @@ func TestLexer(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
+	for _, want := range tests {
 		t.Run("test", func(t *testing.T) {
-			if got := lx.nextToken(); got != tt {
-				t.Errorf("add() = %v, want %v", got, tt)
+			if got := lx.nextToken(); got != want {
+				t.Errorf("got = %v, want %v", got, want)
 			}
 		})
 	}
