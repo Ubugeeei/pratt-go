@@ -3,12 +3,12 @@ package main
 import "testing"
 
 func TestLexer(t *testing.T) {
-	lx := NewLexer("1+2")
+	lx := NewLexer("10+2")
 
 	tests := []Token{
 		{
 			_type:   Number,
-			literal: "1",
+			literal: "10",
 		},
 		{
 			_type:   Plus,

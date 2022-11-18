@@ -26,6 +26,39 @@ func (lx *Lexer) readChar() {
 	lx.readPosition += 1
 }
 
+func (lx *Lexer) peekChar() byte {
+	if lx.readPosition >= len(lx.input) {
+		return 0
+	}
+	return lx.input[lx.readPosition]
+}
+
+func (lx *Lexer) backChar() {
+	lx.position -= 1
+	lx.readPosition -= 1
+	lx.ch = lx.input[lx.position]
+}
+
+func (lx *Lexer) skipWhitespace() {
+	for lx.ch == ' ' || lx.ch == '\t' || lx.ch == '\n' || lx.ch == '\r' {
+		lx.readChar()
+	}
+}
+
+func (l *Lexer) readDigit() string {
+	position := l.position
+	for l.isDigit(l.ch) {
+		l.readChar()
+	}
+	res := l.input[position:l.position]
+	l.backChar()
+	return res
+}
+
+func (_ Lexer) isDigit(ch byte) bool {
+	return '0' <= ch && ch <= '9'
+}
+
 func (lx *Lexer) nextToken() Token {
 	lx.readChar()
 	switch lx.ch {
@@ -55,21 +88,11 @@ func (lx *Lexer) nextToken() Token {
 			literal: "%",
 		}
 		// TODO:
-	case '1':
+	case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
+		literal := lx.readDigit()
 		return Token{
 			_type:   Number,
-			literal: "1",
-		}
-	case '2':
-		return Token{
-			_type:   Number,
-			literal: "2",
-		}
-
-	case ' ':
-		return Token{
-			_type:   Number,
-			literal: "2",
+			literal: literal,
 		}
 
 	default:
