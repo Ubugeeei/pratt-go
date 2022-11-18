@@ -3,7 +3,7 @@ package main
 import "testing"
 
 func TestLexer(t *testing.T) {
-	lx := NewLexer("10+2")
+	lx := NewLexer("10     + 2")
 
 	tests := []Token{
 		{

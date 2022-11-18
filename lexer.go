@@ -40,7 +40,7 @@ func (lx *Lexer) backChar() {
 }
 
 func (lx *Lexer) skipWhitespace() {
-	for lx.ch == ' ' || lx.ch == '\t' || lx.ch == '\n' || lx.ch == '\r' {
+	for lx.peekChar() == ' ' || lx.peekChar() == '\t' || lx.peekChar() == '\n' || lx.peekChar() == '\r' {
 		lx.readChar()
 	}
 }
@@ -60,6 +60,7 @@ func (_ Lexer) isDigit(ch byte) bool {
 }
 
 func (lx *Lexer) nextToken() Token {
+	lx.skipWhitespace()
 	lx.readChar()
 	switch lx.ch {
 	case '+':
@@ -87,14 +88,17 @@ func (lx *Lexer) nextToken() Token {
 			_type:   Percent,
 			literal: "%",
 		}
-		// TODO:
 	case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
 		literal := lx.readDigit()
 		return Token{
 			_type:   Number,
 			literal: literal,
 		}
-
+	case 0:
+		return Token{
+			_type:   EOF,
+			literal: "",
+		}
 	default:
 		return Token{
 			_type:   ILLEGAL,
