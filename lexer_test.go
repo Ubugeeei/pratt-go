@@ -3,7 +3,7 @@ package main
 import "testing"
 
 func TestLexer(t *testing.T) {
-	lx := NewLexer("10     + 2")
+	lx := NewLexer("10     + 2 / 3")
 
 	tests := []Token{
 		{
@@ -17,6 +17,14 @@ func TestLexer(t *testing.T) {
 		{
 			_type:   Number,
 			literal: "2",
+		},
+		{
+			_type:   Slash,
+			literal: "/",
+		},
+		{
+			_type:   Number,
+			literal: "3",
 		},
 	}
 
