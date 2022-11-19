@@ -65,43 +65,43 @@ func (lx *Lexer) nextToken() Token {
 	switch lx.ch {
 	case '+':
 		return Token{
-			_type:   Plus,
+			type_:   Plus,
 			literal: "+",
 		}
 	case '-':
 		return Token{
-			_type:   Minus,
+			type_:   Minus,
 			literal: "-",
 		}
 	case '*':
 		return Token{
-			_type:   Asterisk,
+			type_:   Asterisk,
 			literal: "*",
 		}
 	case '/':
 		return Token{
-			_type:   Slash,
+			type_:   Slash,
 			literal: "/",
 		}
 	case '%':
 		return Token{
-			_type:   Percent,
+			type_:   Percent,
 			literal: "%",
 		}
 	case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
 		literal := lx.readDigit()
 		return Token{
-			_type:   Number,
+			type_:   Number,
 			literal: literal,
 		}
 	case 0:
 		return Token{
-			_type:   EOF,
+			type_:   EOF,
 			literal: "",
 		}
 	default:
 		return Token{
-			_type:   ILLEGAL,
+			type_:   ILLEGAL,
 			literal: string(lx.ch),
 		}
 	}

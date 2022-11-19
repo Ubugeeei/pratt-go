@@ -12,37 +12,37 @@ type TestCase struct {
 
 func TestEval(t *testing.T) {
 	tests := []TestCase{{input: Node{
-		_type: NumberNode,
+		type_: NumberNode,
 		val:   "10",
 		left:  nil,
 		right: nil,
 	}, want: 10}, {input: Node{
-		_type: OperatorNode,
+		type_: OperatorNode,
 		val:   "+",
 		left: &Node{
-			_type: NumberNode,
+			type_: NumberNode,
 			val:   "10",
 		},
 		right: &Node{
-			_type: NumberNode,
+			type_: NumberNode,
 			val:   "2",
 		},
 	}, want: 12}, {input: Node{
-		_type: OperatorNode,
+		type_: OperatorNode,
 		val:   "*",
 		left: &Node{
-			_type: NumberNode,
+			type_: NumberNode,
 			val:   "3",
 		},
 		right: &Node{
-			_type: OperatorNode,
+			type_: OperatorNode,
 			val:   "+",
 			left: &Node{
-				_type: NumberNode,
+				type_: NumberNode,
 				val:   "2",
 			},
 			right: &Node{
-				_type: NumberNode,
+				type_: NumberNode,
 				val:   "1",
 			},
 		},

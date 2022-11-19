@@ -5,7 +5,7 @@ import (
 )
 
 func eval(node Node) int {
-	switch node._type {
+	switch node.type_ {
 	case NumberNode:
 		{
 			n, _ := strconv.Atoi(node.val)

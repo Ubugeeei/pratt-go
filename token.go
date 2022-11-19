@@ -1,12 +1,12 @@
 package main
 
 type Token struct {
-	_type   TokenType
+	type_   TokenType
 	literal string
 }
 
 func (t Token) getPrecedence() int {
-	switch t._type {
+	switch t.type_ {
 	case Plus:
 		return 1
 	case Minus:

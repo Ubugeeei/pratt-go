@@ -16,7 +16,7 @@ func TestParser(t *testing.T) {
 			{
 				input: "10",
 				want: Node{
-					_type: NumberNode,
+					type_: NumberNode,
 					val:   "10",
 					left:  nil,
 					right: nil,
@@ -25,7 +25,7 @@ func TestParser(t *testing.T) {
 			{
 				input: "-10",
 				want: Node{
-					_type: NumberNode,
+					type_: NumberNode,
 					val:   "-10",
 					left:  nil,
 					right: nil,
@@ -34,14 +34,14 @@ func TestParser(t *testing.T) {
 			{
 				input: "10 + 2",
 				want: Node{
-					_type: OperatorNode,
+					type_: OperatorNode,
 					val:   "+",
 					left: &Node{
-						_type: NumberNode,
+						type_: NumberNode,
 						val:   "10",
 					},
 					right: &Node{
-						_type: NumberNode,
+						type_: NumberNode,
 						val:   "2",
 					},
 				},
@@ -49,21 +49,21 @@ func TestParser(t *testing.T) {
 			{
 				input: "10 + 2 * 3",
 				want: Node{
-					_type: OperatorNode,
+					type_: OperatorNode,
 					val:   "+",
 					left: &Node{
-						_type: NumberNode,
+						type_: NumberNode,
 						val:   "10",
 					},
 					right: &Node{
-						_type: OperatorNode,
+						type_: OperatorNode,
 						val:   "*",
 						left: &Node{
-							_type: NumberNode,
+							type_: NumberNode,
 							val:   "2",
 						},
 						right: &Node{
-							_type: NumberNode,
+							type_: NumberNode,
 							val:   "3",
 						},
 					},

@@ -1,7 +1,7 @@
 package main
 
 type Node struct {
-	_type NodeType
+	type_ NodeType
 	val   string
 	left  *Node
 	right *Node

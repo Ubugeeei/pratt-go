@@ -18,8 +18,8 @@ func NewParser(lx *Lexer) *Parser {
 func (p *Parser) parse(precedence int) Node {
 	node := p.parsePrefix()
 
-	for precedence < p.peek_token.getPrecedence() && p.peek_token._type != EOF {
-		switch p.peek_token._type {
+	for precedence < p.peek_token.getPrecedence() && p.peek_token.type_ != EOF {
+		switch p.peek_token.type_ {
 		case Plus, Minus, Asterisk, Slash, Percent:
 			p.nextToken()
 			node = p.parseInfix(node)
@@ -32,12 +32,12 @@ func (p *Parser) parse(precedence int) Node {
 }
 
 func (p *Parser) parsePrefix() Node {
-	switch p.current_token._type {
+	switch p.current_token.type_ {
 	case Minus:
 		val := "-" + p.peek_token.literal
 		p.nextToken()
 		return Node{
-			_type: NumberNode,
+			type_: NumberNode,
 			val:   val,
 			left:  nil,
 			right: nil,
@@ -45,7 +45,7 @@ func (p *Parser) parsePrefix() Node {
 	default:
 		val := p.current_token.literal
 		return Node{
-			_type: NumberNode,
+			type_: NumberNode,
 			val:   val,
 			left:  nil,
 			right: nil,
@@ -60,7 +60,7 @@ func (p *Parser) parseInfix(left Node) Node {
 	right := p.parse(p.current_token.getPrecedence())
 
 	n := Node{
-		_type: OperatorNode,
+		type_: OperatorNode,
 		val:   op.literal,
 		left:  &left,
 		right: &right,

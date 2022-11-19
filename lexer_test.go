@@ -7,23 +7,23 @@ func TestLexer(t *testing.T) {
 
 	tests := []Token{
 		{
-			_type:   Number,
+			type_:   Number,
 			literal: "10",
 		},
 		{
-			_type:   Plus,
+			type_:   Plus,
 			literal: "+",
 		},
 		{
-			_type:   Number,
+			type_:   Number,
 			literal: "2",
 		},
 		{
-			_type:   Slash,
+			type_:   Slash,
 			literal: "/",
 		},
 		{
-			_type:   Number,
+			type_:   Number,
 			literal: "3",
 		},
 	}
