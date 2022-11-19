@@ -1,6 +1,6 @@
 # Pratt Go
 my golang practice.
-# Usage
+### Usage
 input expressions to command line arguments
 ```sh
 ./pratt "1 + 2 * 6"
