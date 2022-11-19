@@ -49,44 +49,44 @@ func TestParser(t *testing.T) {
 					},
 				},
 			},
-			// {
-			// 	input: "10 + 2 * 3",
-			// 	want: Node{
-			// 		_type: OperatorNode,
-			// 		val: Token{
-			// 			_type:   Plus,
-			// 			literal: "+",
-			// 		},
-			// 		left: &Node{
-			// 			_type: NumberNode,
-			// 			val: Token{
-			// 				_type:   Number,
-			// 				literal: "10",
-			// 			},
-			// 		},
-			// 		right: &Node{
-			// 			_type: OperatorNode,
-			// 			val: Token{
-			// 				_type:   Asterisk,
-			// 				literal: "*",
-			// 			},
-			// 			left: &Node{
-			// 				_type: NumberNode,
-			// 				val: Token{
-			// 					_type:   Number,
-			// 					literal: "2",
-			// 				},
-			// 			},
-			// 			right: &Node{
-			// 				_type: NumberNode,
-			// 				val: Token{
-			// 					_type:   Number,
-			// 					literal: "3",
-			// 				},
-			// 			},
-			// 		},
-			// 	},
-			// },
+			{
+				input: "10 + 2 * 3",
+				want: Node{
+					_type: OperatorNode,
+					val: Token{
+						_type:   Plus,
+						literal: "+",
+					},
+					left: &Node{
+						_type: NumberNode,
+						val: Token{
+							_type:   Number,
+							literal: "10",
+						},
+					},
+					right: &Node{
+						_type: OperatorNode,
+						val: Token{
+							_type:   Asterisk,
+							literal: "*",
+						},
+						left: &Node{
+							_type: NumberNode,
+							val: Token{
+								_type:   Number,
+								literal: "2",
+							},
+						},
+						right: &Node{
+							_type: NumberNode,
+							val: Token{
+								_type:   Number,
+								literal: "3",
+							},
+						},
+					},
+				},
+			},
 		}
 
 	for _, test := range tests {
