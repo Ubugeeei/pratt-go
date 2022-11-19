@@ -8,7 +8,8 @@ type Token struct {
 type TokenType int
 
 const (
-	EOF TokenType = iota
+	IllegalToken TokenType = iota
+	EOF
 	NumberToken
 	PlusToken
 	MinusToken

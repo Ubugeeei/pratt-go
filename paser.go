@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type Parser struct {
 	lx            *Lexer
 	current_token Token
@@ -9,55 +11,78 @@ type Parser struct {
 func NewParser(lx *Lexer) *Parser {
 	p := new(Parser)
 	p.lx = lx
-	p.current_token = lx.nextToken()
-	p.peek_token = lx.nextToken()
+	first, _ := lx.nextToken()
+	second, _ := lx.nextToken()
+	p.current_token = first
+	p.peek_token = second
 	return p
 }
 
 // pratt parser
-func (p *Parser) parse(precedence int) Node {
-	node := p.parsePrefix()
+func (p *Parser) parse(precedence int) (Node, error) {
+	node, e := p.parsePrefix()
+	if e != nil {
+		return Node{}, e
+	}
 
 	for precedence < p.peek_token.getPrecedence() && p.peek_token.type_ != EOF {
 		switch p.peek_token.type_ {
 		case PlusToken, MinusToken, AsteriskToken, SlashToken:
-			p.nextToken()
-			node = p.parseInfix(node)
+			e := p.nextToken()
+			if e != nil {
+				return Node{}, e
+			}
+			node, e = p.parseInfix(node)
+			if e != nil {
+				return Node{}, e
+			}
 			break
 		default:
 			break
 		}
 	}
-	return node
+	return node, nil
 }
 
-func (p *Parser) parsePrefix() Node {
+func (p *Parser) parsePrefix() (Node, error) {
 	switch p.current_token.type_ {
 	case MinusToken:
 		val := "-" + p.peek_token.literal
-		p.nextToken()
+		e := p.nextToken()
+		if e != nil {
+			return Node{}, e
+		}
 		return Node{
 			type_: NumberNode,
 			val:   val,
 			left:  nil,
 			right: nil,
-		}
-	default:
+		}, e
+	case NumberToken:
 		val := p.current_token.literal
 		return Node{
 			type_: NumberNode,
 			val:   val,
 			left:  nil,
 			right: nil,
-		}
+		}, nil
+	default:
+		return Node{}, errors.New("unknown token: '" + p.current_token.literal + "'")
 	}
 }
 
-func (p *Parser) parseInfix(left Node) Node {
+func (p *Parser) parseInfix(left Node) (Node, error) {
 	op := p.current_token
 
-	p.nextToken()
-	right := p.parse(p.current_token.getPrecedence())
+	e := p.nextToken()
+	if e != nil {
+		return Node{}, e
+	}
+
+	right, e := p.parse(p.current_token.getPrecedence())
+	if e != nil {
+		return Node{}, e
+	}
 
 	n := Node{
 		type_: OperatorNode,
@@ -65,10 +90,15 @@ func (p *Parser) parseInfix(left Node) Node {
 		left:  &left,
 		right: &right,
 	}
-	return n
+	return n, nil
 }
 
-func (p *Parser) nextToken() {
+func (p *Parser) nextToken() error {
 	p.current_token = p.peek_token
-	p.peek_token = p.lx.nextToken()
+	n, e := p.lx.nextToken()
+	if e != nil {
+		return e
+	}
+	p.peek_token = n
+	return nil
 }

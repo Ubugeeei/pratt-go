@@ -31,12 +31,16 @@ func main() {
 			lexer := NewLexer(input)
 			parser := NewParser(lexer)
 
-			ast := parser.parse(0)
-			res, e := eval(ast)
+			ast, e := parser.parse(0)
 			if e != nil {
 				fmt.Println(e)
 			} else {
-				fmt.Println(res)
+				res, e := eval(ast)
+				if e != nil {
+					fmt.Println(e)
+				} else {
+					fmt.Println(res)
+				}
 			}
 		}
 	} else {
@@ -44,12 +48,16 @@ func main() {
 		lexer := NewLexer(expr)
 		parser := NewParser(lexer)
 
-		ast := parser.parse(0)
-		res, e := eval(ast)
+		ast, e := parser.parse(0)
 		if e != nil {
 			fmt.Println(e)
 		} else {
-			fmt.Println(res)
+			res, e := eval(ast)
+			if e != nil {
+				fmt.Println(e)
+			} else {
+				fmt.Println(res)
+			}
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 type Lexer struct {
 	input        string
 	position     int
@@ -59,7 +61,7 @@ func (_ Lexer) isDigit(ch byte) bool {
 	return '0' <= ch && ch <= '9' || ch == '.'
 }
 
-func (lx *Lexer) nextToken() Token {
+func (lx *Lexer) nextToken() (Token, error) {
 	lx.skipWhitespace()
 	lx.readChar()
 	switch lx.ch {
@@ -67,37 +69,37 @@ func (lx *Lexer) nextToken() Token {
 		return Token{
 			type_:   PlusToken,
 			literal: "+",
-		}
+		}, nil
 	case '-':
 		return Token{
 			type_:   MinusToken,
 			literal: "-",
-		}
+		}, nil
 	case '*':
 		return Token{
 			type_:   AsteriskToken,
 			literal: "*",
-		}
+		}, nil
 	case '/':
 		return Token{
 			type_:   SlashToken,
 			literal: "/",
-		}
+		}, nil
 	case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
 		literal := lx.readDigit()
 		return Token{
 			type_:   NumberToken,
 			literal: literal,
-		}
+		}, nil
 	case 0:
 		return Token{
 			type_:   EOF,
 			literal: "",
-		}
+		}, nil
 	default:
 		return Token{
-			type_:   EOF,
+			type_:   IllegalToken,
 			literal: "",
-		}
+		}, errors.New("unknown token: '" + string(lx.ch) + "'")
 	}
 }

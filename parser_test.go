@@ -74,9 +74,11 @@ func TestParser(t *testing.T) {
 	for _, test := range tests {
 		t.Run("test", func(t *testing.T) {
 			p := NewParser(NewLexer(test.input))
-			got := p.parse(-1)
+			got, e := p.parse(-1)
 			if !reflect.DeepEqual(got, test.want) {
 				t.Errorf("test failed!\ninput:" + test.input + "\ngot: " + got.toString())
+			} else if e != nil {
+				t.Errorf("%d", e)
 			}
 		})
 	}
