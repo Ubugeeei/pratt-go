@@ -50,9 +50,8 @@ func TestEval(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run("test", func(t *testing.T) {
-
-			if got := eval(test.input); !reflect.DeepEqual(got, test.want) {
-				t.Errorf("test failed!")
+			if got, e := eval(test.input); !reflect.DeepEqual(got, test.want) {
+				t.Errorf("%v", e)
 			}
 		})
 	}
