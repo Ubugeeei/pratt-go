@@ -7,7 +7,7 @@ import (
 
 type TestCase struct {
 	input Node
-	want  int
+	want  float64
 }
 
 func TestEval(t *testing.T) {

@@ -56,7 +56,7 @@ func (l *Lexer) readDigit() string {
 }
 
 func (_ Lexer) isDigit(ch byte) bool {
-	return '0' <= ch && ch <= '9'
+	return '0' <= ch && ch <= '9' || ch == '.'
 }
 
 func (lx *Lexer) nextToken() Token {

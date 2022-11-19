@@ -4,11 +4,11 @@ import (
 	"strconv"
 )
 
-func eval(node Node) int {
+func eval(node Node) float64 {
 	switch node.type_ {
 	case NumberNode:
 		{
-			n, _ := strconv.Atoi(node.val)
+			n, _ := strconv.ParseFloat(node.val, 64)
 			return n
 		}
 	case OperatorNode:
@@ -21,8 +21,6 @@ func eval(node Node) int {
 			return eval(*node.left) * eval(*node.right)
 		case "/":
 			return eval(*node.left) / eval(*node.right)
-		case "%":
-			return eval(*node.left) % eval(*node.right)
 		}
 	}
 
