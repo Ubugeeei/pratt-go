@@ -5,14 +5,14 @@ import (
 	"testing"
 )
 
-type Tests struct {
+type ParserTestCase struct {
 	input string
 	want  Node
 }
 
 func TestParser(t *testing.T) {
 	tests :=
-		[]Tests{
+		[]ParserTestCase{
 			{
 				input: "10",
 				want: Node{

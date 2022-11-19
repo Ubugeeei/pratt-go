@@ -5,13 +5,13 @@ import (
 	"testing"
 )
 
-type TestCase struct {
+type EvalTestCase struct {
 	input Node
 	want  float64
 }
 
 func TestEval(t *testing.T) {
-	tests := []TestCase{{input: Node{
+	tests := []EvalTestCase{{input: Node{
 		type_: NumberNode,
 		val:   "10",
 		left:  nil,
