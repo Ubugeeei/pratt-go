@@ -26,6 +26,18 @@ func TestParser(t *testing.T) {
 				},
 			},
 			{
+				input: "-10",
+				want: Node{
+					_type: NumberNode,
+					val: Token{
+						_type:   Number,
+						literal: "-10",
+					},
+					left:  nil,
+					right: nil,
+				},
+			},
+			{
 				input: "10 + 2",
 				want: Node{
 					_type: OperatorNode,

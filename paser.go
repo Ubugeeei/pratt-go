@@ -38,6 +38,7 @@ func (p *Parser) parsePrefix() Node {
 			_type:   Number,
 			literal: "-" + p.peek_token.literal,
 		}
+		p.nextToken()
 		return Node{
 			_type: NumberNode,
 			val:   t,
