@@ -5,30 +5,28 @@ type Token struct {
 	literal string
 }
 
+type TokenType int
+
+const (
+	EOF TokenType = iota
+	NumberToken
+	PlusToken
+	MinusToken
+	SlashToken
+	AsteriskToken
+)
+
 func (t Token) getPrecedence() int {
 	switch t.type_ {
-	case Plus:
+	case PlusToken:
 		return 1
-	case Minus:
+	case MinusToken:
 		return 1
-	case Asterisk:
+	case AsteriskToken:
 		return 2
-	case Slash:
+	case SlashToken:
 		return 2
 	default:
 		return 0
 	}
 }
-
-type TokenType int
-
-const (
-	ILLEGAL TokenType = iota
-	EOF
-	Number
-
-	Plus
-	Minus
-	Slash
-	Asterisk
-)

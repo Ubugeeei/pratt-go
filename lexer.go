@@ -65,28 +65,28 @@ func (lx *Lexer) nextToken() Token {
 	switch lx.ch {
 	case '+':
 		return Token{
-			type_:   Plus,
+			type_:   PlusToken,
 			literal: "+",
 		}
 	case '-':
 		return Token{
-			type_:   Minus,
+			type_:   MinusToken,
 			literal: "-",
 		}
 	case '*':
 		return Token{
-			type_:   Asterisk,
+			type_:   AsteriskToken,
 			literal: "*",
 		}
 	case '/':
 		return Token{
-			type_:   Slash,
+			type_:   SlashToken,
 			literal: "/",
 		}
 	case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
 		literal := lx.readDigit()
 		return Token{
-			type_:   Number,
+			type_:   NumberToken,
 			literal: literal,
 		}
 	case 0:
@@ -96,8 +96,8 @@ func (lx *Lexer) nextToken() Token {
 		}
 	default:
 		return Token{
-			type_:   ILLEGAL,
-			literal: string(lx.ch),
+			type_:   EOF,
+			literal: "",
 		}
 	}
 }
