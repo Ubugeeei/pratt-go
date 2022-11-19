@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type Parser struct {
 	lx            *Lexer
 	current_token Token
@@ -53,11 +51,8 @@ func (p *Parser) parsePrefix() Node {
 
 func (p *Parser) parseInfix(left Node) Node {
 	op := p.current_token
-	right := p.parse(p.current_token.getPrecedence())
 	p.nextToken()
-
-	fmt.Println("left:", left)
-	fmt.Println("right:", right)
+	right := p.parse(p.current_token.getPrecedence())
 
 	n := Node{
 		_type: OperatorNode,
@@ -65,7 +60,6 @@ func (p *Parser) parseInfix(left Node) Node {
 		left:  &left,
 		right: &right,
 	}
-	// p.nextToken()
 	return n
 }
 
