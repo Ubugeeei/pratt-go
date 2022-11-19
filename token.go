@@ -15,8 +15,6 @@ func (t Token) getPrecedence() int {
 		return 2
 	case Slash:
 		return 2
-	case Percent:
-		return 2
 	default:
 		return 0
 	}
@@ -33,5 +31,4 @@ const (
 	Minus
 	Slash
 	Asterisk
-	Percent
 )

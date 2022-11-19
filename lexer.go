@@ -83,11 +83,6 @@ func (lx *Lexer) nextToken() Token {
 			type_:   Slash,
 			literal: "/",
 		}
-	case '%':
-		return Token{
-			type_:   Percent,
-			literal: "%",
-		}
 	case '1', '2', '3', '4', '5', '6', '7', '8', '9', '0':
 		literal := lx.readDigit()
 		return Token{

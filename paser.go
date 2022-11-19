@@ -20,7 +20,7 @@ func (p *Parser) parse(precedence int) Node {
 
 	for precedence < p.peek_token.getPrecedence() && p.peek_token.type_ != EOF {
 		switch p.peek_token.type_ {
-		case Plus, Minus, Asterisk, Slash, Percent:
+		case Plus, Minus, Asterisk, Slash:
 			p.nextToken()
 			node = p.parseInfix(node)
 			break
