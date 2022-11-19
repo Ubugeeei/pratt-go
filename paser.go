@@ -9,16 +9,24 @@ type Parser struct {
 func NewParser(lx *Lexer) *Parser {
 	p := new(Parser)
 	p.lx = lx
-	p.current_token = p.lx.nextToken()
-	p.peek_token = p.lx.nextToken()
+	p.current_token = lx.nextToken()
+	p.peek_token = lx.nextToken()
 	return p
 }
 
 // pratt parser
 func (p *Parser) parse(precedence int) Node {
 	node := p.parsePrefix()
+
 	for precedence < p.peek_token.getPrecedence() && p.peek_token._type != EOF {
-		node = p.parseInfix(node)
+		switch p.peek_token._type {
+		case Plus, Minus, Asterisk, Slash, Percent:
+			p.nextToken()
+			node = p.parseInfix(node)
+			break
+		default:
+			break
+		}
 	}
 	return node
 }
@@ -30,7 +38,6 @@ func (p *Parser) parsePrefix() Node {
 			_type:   Number,
 			literal: "-" + p.peek_token.literal,
 		}
-		p.nextToken() // skip the number
 		return Node{
 			_type: NumberNode,
 			val:   t,
@@ -39,7 +46,6 @@ func (p *Parser) parsePrefix() Node {
 		}
 	default:
 		t := p.current_token
-		p.nextToken()
 		return Node{
 			_type: NumberNode,
 			val:   t,
@@ -51,6 +57,7 @@ func (p *Parser) parsePrefix() Node {
 
 func (p *Parser) parseInfix(left Node) Node {
 	op := p.current_token
+
 	p.nextToken()
 	right := p.parse(p.current_token.getPrecedence())
 
