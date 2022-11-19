@@ -34,22 +34,19 @@ func (p *Parser) parse(precedence int) Node {
 func (p *Parser) parsePrefix() Node {
 	switch p.current_token._type {
 	case Minus:
-		t := Token{
-			_type:   Number,
-			literal: "-" + p.peek_token.literal,
-		}
+		val := "-" + p.peek_token.literal
 		p.nextToken()
 		return Node{
 			_type: NumberNode,
-			val:   t,
+			val:   val,
 			left:  nil,
 			right: nil,
 		}
 	default:
-		t := p.current_token
+		val := p.current_token.literal
 		return Node{
 			_type: NumberNode,
-			val:   t,
+			val:   val,
 			left:  nil,
 			right: nil,
 		}
@@ -64,7 +61,7 @@ func (p *Parser) parseInfix(left Node) Node {
 
 	n := Node{
 		_type: OperatorNode,
-		val:   op,
+		val:   op.literal,
 		left:  &left,
 		right: &right,
 	}

@@ -2,10 +2,17 @@ package main
 
 type Node struct {
 	_type NodeType
-	val   Token
+	val   string
 	left  *Node
 	right *Node
 }
+
+type NodeType int
+
+const (
+	NumberNode NodeType = iota
+	OperatorNode
+)
 
 func (n Node) toString() string {
 	var left string
@@ -22,12 +29,5 @@ func (n Node) toString() string {
 		right = n.right.toString()
 	}
 
-	return "{ val: " + n.val.literal + ", left: " + left + ", right: " + right + " }"
+	return "{ val: " + n.val + ", left: " + left + ", right: " + right + " }"
 }
-
-type NodeType int
-
-const (
-	NumberNode NodeType = iota
-	OperatorNode
-)

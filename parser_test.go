@@ -17,10 +17,7 @@ func TestParser(t *testing.T) {
 				input: "10",
 				want: Node{
 					_type: NumberNode,
-					val: Token{
-						_type:   Number,
-						literal: "10",
-					},
+					val:   "10",
 					left:  nil,
 					right: nil,
 				},
@@ -29,10 +26,7 @@ func TestParser(t *testing.T) {
 				input: "-10",
 				want: Node{
 					_type: NumberNode,
-					val: Token{
-						_type:   Number,
-						literal: "-10",
-					},
+					val:   "-10",
 					left:  nil,
 					right: nil,
 				},
@@ -41,23 +35,14 @@ func TestParser(t *testing.T) {
 				input: "10 + 2",
 				want: Node{
 					_type: OperatorNode,
-					val: Token{
-						_type:   Plus,
-						literal: "+",
-					},
+					val:   "+",
 					left: &Node{
 						_type: NumberNode,
-						val: Token{
-							_type:   Number,
-							literal: "10",
-						},
+						val:   "10",
 					},
 					right: &Node{
 						_type: NumberNode,
-						val: Token{
-							_type:   Number,
-							literal: "2",
-						},
+						val:   "2",
 					},
 				},
 			},
@@ -65,36 +50,21 @@ func TestParser(t *testing.T) {
 				input: "10 + 2 * 3",
 				want: Node{
 					_type: OperatorNode,
-					val: Token{
-						_type:   Plus,
-						literal: "+",
-					},
+					val:   "+",
 					left: &Node{
 						_type: NumberNode,
-						val: Token{
-							_type:   Number,
-							literal: "10",
-						},
+						val:   "10",
 					},
 					right: &Node{
 						_type: OperatorNode,
-						val: Token{
-							_type:   Asterisk,
-							literal: "*",
-						},
+						val:   "*",
 						left: &Node{
 							_type: NumberNode,
-							val: Token{
-								_type:   Number,
-								literal: "2",
-							},
+							val:   "2",
 						},
 						right: &Node{
 							_type: NumberNode,
-							val: Token{
-								_type:   Number,
-								literal: "3",
-							},
+							val:   "3",
 						},
 					},
 				},
