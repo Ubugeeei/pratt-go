@@ -1,7 +1,43 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	fmt.Printf("hello, world\n")
+	argv := os.Args
+
+	var isInteractive bool
+	for _, arg := range argv {
+		if arg == "-i" {
+			isInteractive = true
+		}
+	}
+
+	if isInteractive {
+		fmt.Println("input your expression")
+		for {
+			fmt.Print("> ")
+			var input string
+			fmt.Scanln(&input)
+			if input == "exit" {
+				fmt.Println("Bye!")
+				return
+			}
+			lexer := NewLexer(input)
+			parser := NewParser(lexer)
+			ast := parser.parse(0)
+			res := eval(ast)
+			fmt.Println(res)
+		}
+
+	} else {
+		expr := argv[1]
+		lexer := NewLexer(expr)
+		parser := NewParser(lexer)
+		ast := parser.parse(0)
+		res := eval(ast)
+		fmt.Println(res)
+	}
 }
