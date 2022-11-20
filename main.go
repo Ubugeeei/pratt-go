@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 )
@@ -25,13 +26,13 @@ func run(expr string) {
 	ast, e := parser.Parse()
 	if e != nil {
 		fmt.Println(e)
-		return
+		os.Exit(1)
 	}
 
 	res, e := eval(ast)
 	if e != nil {
 		fmt.Println(e)
-		return
+		os.Exit(1)
 	}
 
 	fmt.Println(res)
@@ -42,8 +43,9 @@ func runInteractive() {
 	for {
 		fmt.Print("> ")
 
-		var input string
-		fmt.Scanln(&input)
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		input := scanner.Text()
 
 		if input == "exit" {
 			fmt.Println("Bye!")
