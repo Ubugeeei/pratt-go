@@ -82,7 +82,7 @@ func (p *Parser) parseInfix(left Node) (Node, error) {
 		return Node{}, e
 	}
 
-	right, e := p.parseInternal(p.current_token.GetPrecedence())
+	right, e := p.parseInternal(op.GetPrecedence())
 	if e != nil {
 		return Node{}, e
 	}
