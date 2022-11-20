@@ -14,19 +14,19 @@ const (
 	OperatorNode
 )
 
-func (n Node) toString() string {
+func (n Node) ToString() string {
 	var left string
 	if n.left == nil {
 		left = "nil"
 	} else {
-		left = n.left.toString()
+		left = n.left.ToString()
 	}
 
 	var right string
 	if n.right == nil {
 		right = "nil"
 	} else {
-		right = n.right.toString()
+		right = n.right.ToString()
 	}
 
 	return "{ val: " + n.val + ", left: " + left + ", right: " + right + " }"

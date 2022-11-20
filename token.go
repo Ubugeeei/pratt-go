@@ -17,7 +17,7 @@ const (
 	AsteriskToken
 )
 
-func (t Token) getPrecedence() int {
+func (t Token) GetPrecedence() int {
 	switch t.type_ {
 	case PlusToken:
 		return 1

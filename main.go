@@ -31,7 +31,7 @@ func main() {
 			lexer := NewLexer(input)
 			parser := NewParser(lexer)
 
-			ast, e := parser.parse(0)
+			ast, e := parser.Parse()
 			if e != nil {
 				fmt.Println(e)
 			} else {
@@ -48,7 +48,7 @@ func main() {
 		lexer := NewLexer(expr)
 		parser := NewParser(lexer)
 
-		ast, e := parser.parse(0)
+		ast, e := parser.Parse()
 		if e != nil {
 			fmt.Println(e)
 		} else {

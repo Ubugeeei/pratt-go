@@ -82,7 +82,7 @@ func TestLexer(t *testing.T) {
 			lx := NewLexer(testCase.input)
 			var got []Token
 			for {
-				tok, _ := lx.nextToken()
+				tok, _ := lx.GetNextToken()
 				got = append(got, tok)
 				if tok.type_ == EOF {
 					break
